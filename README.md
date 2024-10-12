@@ -1,1 +1,1 @@
-image process için repository
+image process için repo
