@@ -1,1 +1,1 @@
-image process için repo
+repo for image processing
