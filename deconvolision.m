@@ -1,0 +1,10 @@
+I=imread('rice.png');
+PSF=fspecial('gaussian',7,10);
+V=0.01;
+BlurredNoisy=imnoise(imfilter(I,PSF),'gaussian',0,V);
+NP=V.*prod(size(I));
+[J Lagra_J]=deconv(BlurredNoisy,PSF,NP);
+[K Lagra_K]=deconvreg(BlurredNoisy,PSF,[],Lagra_J.*10);
+subplot(1,3,1);imshow(BlurredNoisy);
+subplot(1,3,2);imshow(J);
+subplot(1,3,3);imshow(K);
