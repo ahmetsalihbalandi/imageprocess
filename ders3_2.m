@@ -1,0 +1,11 @@
+B=imread('cell.tif');
+figure;imshow(B);
+D=imread('onion.png');
+figure;imshow(D);
+B(25,50)
+B(25,50)=255;
+figure;imshow(B);
+D(25,50,:)
+D(25,50,1)
+D(25,50,:)=[255,255,255];
+figure;imshow(D);
