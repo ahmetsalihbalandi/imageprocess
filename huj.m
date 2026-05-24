@@ -1,0 +1,30 @@
+I = checkerboard(20,4);
+I = imread('trui.png');
+[nrows,ncols] = size(I);
+[xi,yi] = meshgrid(1:ncols, 1:nrows);
+imid = round(size(I,2)/2);
+xt = xi(:) - imid;
+yt = yi(:) - imid;
+[theta,r] = cart2pol(xt,yt);
+a = .0005;
+s = r + a.*r.^10;
+[ut,vt] = pol2cart(theta,s);
+u = reshape(ut,size(xi)) + imid;
+v = reshape(vt,size(yi)) + imid;
+tmap_B = cat(3,u,v);
+resamp = makeresampler('linear', 'fill');
+I_barrel = tformarray(I,[],resamp, ...
+    [2 1],[1 2],[],tmap_B,.3);
+[theta,r] = cart2pol(xt,yt);
+a = -0.000015;
+s = r + a.*r.^3;
+[ut,vt] = pol2cart(theta,s);
+u = reshape(ut,size(xi)) + imid;
+v = reshape(vt,size(yi)) + imid;
+tmap_B = cat(3,u,v);
+resamp = makeresampler('linear', 'fill');
+I_pin = tformarray(I,[],resamp, ...
+    [2 1],[1 2],[],tmap_B,.3);
+subplot(1,3,1); imshow(I);
+subplot(1,3,2); imshow(I_barrel);
+subplot(1,3,3); imshow(I_pin);
