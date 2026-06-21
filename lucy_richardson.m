@@ -1,0 +1,12 @@
+A = imread('trui.png'); A=mat2gray(double(A));
+PSF = fspecial('gaussian',7,10);
+V = .0001;
+J0 = imnoise(imfilter(A,PSF),'gaussian',0,V);
+WT = zeros(size(A));WT(5:end-4,5:end-4) = 1;
+J1 = deconvlucy(J0,PSF,10);
+J2 = deconvlucy(J0,PSF,20,sqrt(V));
+J3 = deconvlucy(J0,PSF,20,sqrt(V),WT);
+subplot(141);imshow(J0);
+subplot(142);imshow(J1);
+subplot(143);imshow(J2);
+subplot(144);imshow(J3);
