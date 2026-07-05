@@ -1,0 +1,11 @@
+mask=~imread('muceddid.jpg');
+mask=imclose(mask,ones(5));
+se=strel('line',40,90);
+marker=imerode(mask,se);
+im=imreconstruct(~marker,~mask);
+subplot(3,1,1), imshow(~mask);
+title('orginal mask image');
+subplot(3,1,2), imshow(~marker);
+title('marker image');
+subplot(3,1,3), imshow(~im);
+title('opening by reconstruction');
